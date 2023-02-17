@@ -38,12 +38,12 @@ pub async fn download_quilt(
 ) -> Result<(), ()> {
     let loader_version = get_quilt_version(client).await?;
 
-    if mc_dir.join("launcher_profiles.json").exists() {
+    if !mc_dir.join("launcher_profiles.json").exists() {
         todo!()
     }
 
     let profile_name = if iris {
-        todo!()
+        format!("Iris & Sodium for {}", version.name)
     } else {
         format!("quilt-loader-{}-{}", loader_version, version.name)
     };
@@ -128,9 +128,9 @@ pub async fn download_quilt(
             profile_name.clone(),
             Profile {
                 name: if iris {
-                    format!("Iris {}", &version.name)
+                    format!("iris-quilt-loader-{}", &version.name)
                 } else {
-                    format!("Quilt Loader {}", &version.name)
+                    format!("quilt-loader-{}", &version.name)
                 },
                 profile_type: "custom".into(),
                 created: Utc::now(),
